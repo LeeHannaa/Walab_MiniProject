@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu; // SubMenu 컴포넌트 추가
 
 function HomePage() {
     const navigate = useNavigate();
@@ -113,16 +114,18 @@ function HomePage() {
                     defaultSelectedKeys={["1"]}
                     mode="inline"
                 >
-                    {campNames.map((campName) => (
-                        <Menu.Item key={campName} onClick={() => handleCampNameSelect(campName)}>
-                            {campName}
-                        </Menu.Item>
-                    ))}
+                    <SubMenu key="campMenu" title="CampName" icon={<FolderOpenOutlined />}>
+                        {campNames.map((campName) => (
+                            <Menu.Item key={campName} onClick={() => handleCampNameSelect(campName)}>
+                                {campName}
+                            </Menu.Item>
+                        ))}
+                    </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
                 <Header style={{ padding: 0, background: colorBgContainer, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} >
-                    <h2><span><FolderOpenOutlined />  </span>캠프 수료증 PDF 자동 생성 프로그램</h2>
+                    <h2>캠프 수료증 PDF 자동 생성 프로그램</h2>
                 </Header>
                 <Content style={{ margin: "0 16px" }}>
                     <Breadcrumb style={{ margin: "16px 0" }}>

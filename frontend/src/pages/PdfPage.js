@@ -3,11 +3,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function PdfPage() {
-    const { studentId } = useParams(); // URL에서 학생 ID 가져오기
+    const { studentId } = useParams();
     const [studentInfo, setStudentInfo] = useState({});
 
     useEffect(() => {
-        // 학생 ID를 사용하여 서버에서 학생 정보를 가져옴
         axios.get(`http://localhost:8080/hgu/stuInfo/${studentId}`)
             .then((response) => {
                 setStudentInfo(response.data); // 학생 정보를 상태에 설정
