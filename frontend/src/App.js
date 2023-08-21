@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { FolderOpenOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
+import axios from 'axios';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -31,6 +32,15 @@ function App() {
     const {
         token: { colorBgContainer }
     } = theme.useToken();
+    //Read
+    const [studentList, setStudentList] = useState([]);
+    const fetchStudent = async () => {
+        const response = await axios.get('http://localhost:8080/hgu/stuInfo');
+        setStudentList(response.data);
+    };
+    useEffect(() => {
+        fetchStudent();
+    }, []);
 
     return (
         <Layout style={{ minHeight: "100vh" }}>
@@ -63,6 +73,12 @@ function App() {
                         }}
                     >
                         캠프 수료한 사람들 명단 리스트
+                        <ul>
+                            {studentList.map((student) => (
+                                <li key={student.id}><h3>{student.name} - {student.department} , {student.campname}</h3>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </Content>
                 <Footer style={{ textAlign: "center" }}>
