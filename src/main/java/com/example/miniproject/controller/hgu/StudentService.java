@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -15,5 +16,11 @@ public class StudentService {
 
     public List<StuInfo> getAllStuInfo() {
         return stuInfoRepository.findAll();
+    }
+
+    public StuInfo getStuInfoById(Long studentId) {
+        // 학생 ID를 사용하여 해당 학생의 정보 조회
+        Optional<StuInfo> student = stuInfoRepository.findById(studentId);
+        return student.orElse(null); // 해당 학생이 없으면 null 반환 또는 예외 처리
     }
 }
