@@ -22,6 +22,6 @@
 <br>
 - DB : H2<br>
 - PDF 생성(라이브러리 검색) 관련 오픈 소스<br>
-- 페이지 디자인은 일반적인 CSS 템플릿<br>
+- 페이지 디자인은 일반적인 CSS 템플릿 (ant Design)<br>
 - Back : Spring Boot<br>
 - Front : React
