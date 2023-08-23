@@ -40,8 +40,18 @@ const LabelText = styled.label`
     font-size: 15px;
 `;
 const InputBox = styled.input`
-  width: 400px;
-  height: 40px;
+  width: 200px; // 입력 칸을 폼 너비에 맞게 확장
+  height: 35px;
+  padding: 2px; // 텍스트 내용과 가장자리 사이에 패딩 추가
+  margin-top: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px; // 입력 칸 주변에 둥근 테두리 반경 추가
+  font-size: 15px;
+  transition: border-color 0.2s; // 테두리 색상 변경 시 부드럽게 전환
+  &:focus {
+    outline: none; // 포커스 시 브라우저 기본 스타일 제거
+    border-color: #000080; // 포커스 시 테두리 색상 변경
+  }
 `;
 
 function CreatePage() {
@@ -104,7 +114,7 @@ function CreatePage() {
                         <form onSubmit={handleSubmit}
                               style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                             <Div>
-                                <LabelText>학번</LabelText>
+                                <LabelText style={{ marginLeft: '50px' }}>학번</LabelText>
                                 <InputBox
                                     type="text"
                                     name="id"
@@ -114,7 +124,7 @@ function CreatePage() {
                                 />
                             </Div>
                             <Div>
-                                <LabelText>이름</LabelText>
+                                <LabelText style={{ marginLeft: '50px' }}>이름</LabelText>
                                 <InputBox
                                     type="text"
                                     name="name"
@@ -124,7 +134,7 @@ function CreatePage() {
                                 />
                             </Div>
                             <Div>
-                                <LabelText>학부</LabelText>
+                                <LabelText style={{ marginLeft: '50px' }}>학부</LabelText>
                                 <InputBox
                                     type="text"
                                     name="department"
@@ -134,7 +144,7 @@ function CreatePage() {
                                 />
                             </Div>
                             <Div>
-                                <LabelText>캠프 이름</LabelText>
+                                <LabelText style={{ marginLeft: '20px' }}>캠프 이름</LabelText>
                                 <InputBox
                                     type="text"
                                     name="campname"
