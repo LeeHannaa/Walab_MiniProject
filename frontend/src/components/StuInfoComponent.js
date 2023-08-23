@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {Document, Text, Page, Font, View} from '@react-pdf/renderer';
+import {Document, Text, Page, Font, View, Image} from '@react-pdf/renderer';
+import HGU from "../assets/img/hgu.png";
 
 Font.register({ //한글 폰트 설정
     family: 'SpoqaHanSans',
@@ -35,11 +36,10 @@ const styles = {
         textAlign: 'left',
     },
     logo: {
-        fontSize: 15,
-        marginTop: 30,
-        marginRight: 30,
-        color: "blue",
-        fontFamily: 'SpoqaHanSans',
+        width: 50,
+        height: 50,
+        marginTop: 40,
+        marginRight: 50,
         textAlign: 'right',
     },
     info: {
@@ -137,7 +137,7 @@ function StuInfoComponent({ studentId }) {
                 <View style={styles.outerBorder}>
                     <View style={styles.horizontalContainer}>
                         <Text style={styles.ho}>[2023년 제 0001호]</Text>
-                        <Text style={styles.logo}>HGU</Text>
+                        <Image source={HGU} style={styles.logo}></Image>
                     </View>
 
                     <Text style={styles.title}>수 료 증</Text>

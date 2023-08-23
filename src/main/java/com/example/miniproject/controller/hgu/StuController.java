@@ -22,4 +22,14 @@ public class StuController {
     public StuInfo getStuInfoById(@PathVariable Long studentId) {
         return studentService.getStuInfoById(studentId);
     }
+
+    @DeleteMapping(value = "/stuInfo/{studentId}")
+    public void deleteStuInfo(@PathVariable Long studentId) {
+        studentService.deleteStuInfo(studentId);
+    }
+
+    @PostMapping(value = "/stuInfo/create")
+    public StuInfo createStuInfo(@RequestBody StuInfo stuInfo) {
+        return studentService.createStuInfo(stuInfo);
+    }
 }

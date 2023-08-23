@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { FolderOpenOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { FolderOpenOutlined, FilePdfOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Table, theme } from "antd";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import styled from "styled-components";
+
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu; // SubMenu 컴포넌트 추가
 
+const CreateButton = styled.button`
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    align-items: right;
+    width: 150px;
+    height: 30px;
+    background: #000080;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+`;
 function HomePage() {
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
@@ -69,6 +84,20 @@ function HomePage() {
                 </span>
             ),
         },
+        {
+            title: "삭제",
+            dataIndex: "delete",
+            key: "delete",
+            align: "center",
+            render: (text, student) => (
+                <span
+                    style={{ cursor: "pointer", display: "flex", justifyContent: "center" }}
+                    onClick={() => handleDeleteStudent(student.id)} // 클릭 이벤트 핸들러 호출
+                >
+                    <DeleteOutlined />
+                </span>
+            ),
+        },
     ];
 
     const handleGeneratePdfClick = (student) => {
@@ -92,6 +121,21 @@ function HomePage() {
             console.error("학생 목록을 불러오는 중 오류 발생: ", error);
         }
     };
+    const handleDeleteStudent = async (studentId) => {
+        // 클라이언트에서 서버로 DELETE 요청을 보내서 학생 정보를 삭제
+        const result = window.confirm('이 뉴스를 정말 지우겠습니까?');
+        if (result) {
+            try {
+                await axios.delete(`http://localhost:8080/hgu/stuInfo/${studentId}`);
+                setStudentList((prevStudentList) =>
+                    prevStudentList.filter((student) => student.id !== studentId)
+                );
+            } catch (error) {
+                // 오류 처리
+                console.error("삭제 실패", error);
+            }
+        }
+    };
 
     useEffect(() => {
         fetchStudent();
@@ -99,6 +143,10 @@ function HomePage() {
 
     const handleCampNameSelect = (campName) => {
         setSelectedCampName(campName);
+    };
+
+    const handleCreateStudentClick = () => {
+        navigate('/create');
     };
 
     return (
@@ -138,6 +186,7 @@ function HomePage() {
                             background: colorBgContainer
                         }}
                     >
+                        <CreateButton onClick={handleCreateStudentClick}><PlusOutlined></PlusOutlined> 수료 학생 추가하기</CreateButton>
                         <Table columns={columns} dataSource={studentList.filter(student => student.campname === selectedCampName)} />
                     </div>
                 </Content>
