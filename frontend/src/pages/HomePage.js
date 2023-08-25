@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FolderOpenOutlined, FilePdfOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { FolderOpenOutlined, FilePdfOutlined, DeleteOutlined, PlusOutlined, PaperClipOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Table, theme } from "antd";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
@@ -85,6 +85,20 @@ function HomePage() {
             ),
         },
         {
+            title: "수정",
+            dataIndex: "update",
+            key: "update",
+            align: "center",
+            render: (text, student) => (
+                <span
+                    style={{ cursor: "pointer", display: "flex", justifyContent: "center" }}
+                    onClick={() => handleUpdateStudentClick(student.id)} // 클릭 이벤트 핸들러 호출
+                >
+                    <PaperClipOutlined />
+                </span>
+            ),
+        },
+        {
             title: "삭제",
             dataIndex: "delete",
             key: "delete",
@@ -147,6 +161,10 @@ function HomePage() {
 
     const handleCreateStudentClick = () => {
         navigate('/create');
+    };
+
+    const handleUpdateStudentClick = async (studentId) => {
+        navigate(`/update/${studentId}`);
     };
 
     return (
