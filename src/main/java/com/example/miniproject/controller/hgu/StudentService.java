@@ -31,4 +31,8 @@ public class StudentService {
     public StuInfo createStuInfo(StuInfo stuInfo) {
         return stuInfoRepository.save(stuInfo);
     }
+
+    public StuInfo updateStuInfo(StuInfo stuInfo) {
+        return stuInfoRepository.save(stuInfo);
+    }
 }

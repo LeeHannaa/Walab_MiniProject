@@ -32,4 +32,8 @@ public class StuController {
     public StuInfo createStuInfo(@RequestBody StuInfo stuInfo) {
         return studentService.createStuInfo(stuInfo);
     }
+
+    @PostMapping(value = "/stuInfo/{studentId}")
+    public StuInfo updateStuInfo(@RequestBody StuInfo stuInfo) { return studentService.updateStuInfo(stuInfo); }
+
 }
